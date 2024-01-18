@@ -263,3 +263,35 @@ void mul_op(stack_t **stack, unsigned int line_number)
 	(*stack)->next->n *= (*stack)->n;
 	pop(stack, line_number);/* Remove the top element */
 }
+
+/**
+ * mod_op - Computes the rest of the division of the second top element
+ * of the stack by the top element.
+ *
+ * @stack: A pointer to the head of the stack.
+ * @line_number: The line of the intruction in the Monty file.
+ *
+ * Description: This function computes the rest of the division of the second
+ * top element of the stack by the top element. If the stack contains less
+ * than two elements, it prints an error message and exits with EXIT_FAILURE.
+ * If the top element of the stack is 0, it prints and error message and exits
+ * with EXIT_FAILURE. The result is stored in the second top element of the
+ * stack, and the top element is removed.
+ */
+void mod_op(stack_t **stack, unsigned int line_number)
+{
+	if (list_size(monty) < 2)
+	{
+		fprintf(stderr, "L%u: can't mod, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+
+	if ((*stack)->n == 0)
+	{
+		fprintf(stderr, "L%u: division by zero\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+
+	(*stack)->next->n %= (*stack)->n;
+	pop(stack, line_number);/* Remove the top element */
+}
