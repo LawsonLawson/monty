@@ -50,3 +50,21 @@ void push(stack_t **stack, int data)
 	monty.size++;
 }
 
+void pall(stack_t **stack, __attribute__((unused)) unsigned int line_number)
+{
+	stack_t *current = NULL;
+
+	if (list_empty(monty))
+	{
+		return; /* list empty, return */
+	}
+
+	current = *stack;
+	while (current != NULL)
+	{
+		printf("%d\n", current->n);
+		current = current->next;
+	}
+
+	fflush(stdout);
+}

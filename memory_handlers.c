@@ -54,7 +54,6 @@ void *_calloc(unsigned int nmemb, unsigned int size)
  *
  * Note: explicitly cast the pointer type to void when you call `_free`.
  */
-
 void _free(void **ptr)
 {
 	if (ptr != NULL && *ptr != NULL)

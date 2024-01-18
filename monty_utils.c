@@ -71,7 +71,7 @@ void execute_command(char *command)
 
 	/* an array of instruction_t struct with opcode-function pairs */
 	instruction_t instructions[] = {
-		{"push", push_to_stack}
+		{"push", push_to_stack}, {"pall", pall}
 	};
 
 	/* Loop through the instructions array to find a matching opcode */
