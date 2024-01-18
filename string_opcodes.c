@@ -72,18 +72,3 @@ void pstr_op(stack_t **stack, unsigned int line_number)
 	(void)line_number;/* perhaps __unused__ att would surfice */
 }
 
-/**
- * nop - Does not do anything.
- *
- * @stack: A pointer to the head of the stack.
- * @line_number: The line number of instruction in the Monry file.
- *
- * Description: This function doesn't perform any operation unlike the others.
- * It takes the stack and line number parameters, but it does not modify the
- * stack ofr perform any other action on it.
- */
-void nop(stack_t **stack, unsigned int line_number)
-{
-	(void)stack;
-	(void)line_number;
-}
