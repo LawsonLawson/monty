@@ -211,3 +211,32 @@ void sub(stack_t **stack, unsigned int line_number)
 	(*stack)->next->n -= (*stack)->n;
 	pop(stack, line_number);/* Remove the top element */
 }
+
+/**
+ * div_op - Divides the second top element of the stack by the top element.
+ *
+ * @stack: A pointer to the head of the stack.
+ * @line_number: The line number of instruction in the Monty file.
+ *
+ * Description: This function divides the second element of the stack by the
+ * top element. If the stack contains less than two elements, it prints an
+ * error message and exits with EXIT_FAILURE. The result is stored in the
+ * second top element of the stack, and the top element is removed.
+ */
+void div_op(stack_t **stack, unsigned int line_number)
+{
+	if (list_size(monty) < 2)
+	{
+		fprintf(stderr, "L%u: can't div, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+
+	if ((*stack)->n == 0)
+	{
+		fprintf(stderr, "L%u: division by zero\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+
+	(*stack)->next->n /= (*stack)->n;
+	pop(stack, line_number);/* Remove the top element */
+}
