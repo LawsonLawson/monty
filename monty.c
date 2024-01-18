@@ -12,7 +12,8 @@ list monty = {NULL, NULL, 0, NULL, NULL, NULL, NULL, 0, 0, NULL, _free};
  * Description:
  *   This function serves as the entry point for the Monty interpreter.
  *   It validates the input, sets the filename from the command-line argument,
- *   calls the parse function to process the Monty file, and returns 0 on success.
+ *   calls the parse function to process the Monty file, and returns 0 on
+ *   success.
  *
  * Return: 0 on success, EXIT_FAILURE on failure
  */
@@ -31,6 +32,6 @@ int main(int argc, char *argv[])
 
 	/* Call the `parse_input` function to process the Monty file */
 	parse_input();
-	
+
 	return (0); /* Return 0 to indicate successful execution */
 }
