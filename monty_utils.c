@@ -77,7 +77,6 @@ void execute_command(char *command)
 	/* Loop through the instructions array to find a matching opcode */
 	while (instructions[i].opcode != NULL)
 	{
-		/* Tokenize the command to get the opcode */
 		monty.opcode = strtok(command, " \t\n");
 		if ((monty.opcode != NULL) && IS_STACK_OR_QUEUE(monty.opcode))
 		{
@@ -95,13 +94,11 @@ void execute_command(char *command)
 			/* If the opcode is "push," get the data argument */
 			if (strcmp(monty.opcode, "push") == 0)
 				monty.data = strtok(NULL, " \t\n");
-			/* Call the corresponding function for the opcode */
 			instructions[i].f(&monty.head, monty.line_number);
 			return;
 		}
 		i++;
 	}
-	/* Handle the case where the opcode is not recognized */
 	if (instructions[i].opcode == NULL)
 	{
 		fprintf(stderr, "L%u: unknown instruction %s\n", monty.line_number,
@@ -150,3 +147,4 @@ int is_integer(const char *str)
 
 	return (1);
 }
+

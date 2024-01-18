@@ -14,7 +14,6 @@
 #define GO_STACK 1
 #define GO_QUEUE 2
 
-
 /**
  * struct stack_s - Doubly likned list representation of a stack (or queue)
  * @n: integer.

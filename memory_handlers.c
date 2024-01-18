@@ -82,12 +82,12 @@ void free_stack(stack_t **stack)
 	}
 }
 
- /**
+/**
  * exit_gracefully - Performs cleanup tasks before exiting the program.
  *
  * Description:
  *   This function is responsible for performing cleanup tasks
- *   before exiting the program in case of an error or 
+ *   before exiting the program in case of an error or
  *   abnormal termination. It deallocates memory for the buffer,
  *   frees the entire stack, closes the file pointer,
  *   and then exits the program with a failure status.
