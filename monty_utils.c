@@ -34,6 +34,9 @@ void parse_input(void)
 	while ((bytes_read = getline(&monty.buffer, &size, monty.file_pointer)) != -1)
 	{
 		++monty.line_number;
+		/* Skip lines starting with '#' */
+		if (monty.buffer[0] == '#')
+			continue;
 		execute_command(monty.buffer);
 	}
 
