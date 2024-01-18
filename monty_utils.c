@@ -4,9 +4,10 @@
  * parse_input - Reads and processes input commands from a Monty file.
  *
  * Description:
- *   This function opens a Monty file for reading, allocates memory for a buffer
- *   to store input lines, and then reads and processes each line from the file.
- *   It also handles errors related to file opening, memory allocation, and reading.
+ *   This function opens a Monty file for reading, allocates memory for a
+ *   buffer to store input lines, and then reads and processes each line from
+ *   the file. It also handles errors related to file opening, memory
+ *   allocation, and reading.
  */
 void parse_input(void)
 {
@@ -29,7 +30,6 @@ void parse_input(void)
 		fclose(monty.file_pointer);
 		exit(EXIT_FAILURE);
 	}
-
 	/* Read and process each line from the Monty file */
 	while ((bytes_read = getline(&monty.buffer, &size, monty.file_pointer)) != -1)
 	{
@@ -59,11 +59,11 @@ void parse_input(void)
  * @command: The string containing the Monty command.
  *
  * Description:
- *   This function takes a Monty command as input, tokenizes it to extract the opcode,
- *   and executes the corresponding operation based on the opcode. It supports various
- *   opcodes such as "push" and "pall," and it dynamically calls the associated functions.
- *   Additionally, it handles errors for unknown instructions and provides proper error
- *   messages with line numbers.
+ *   This function takes a Monty command as input, tokenizes it to extract the
+ *   opcode, and executes the corresponding operation based on the opcode.
+ *   It supports various opcodes such as "push" and "pall," and it dynamically
+ *   calls the associated functions. Additionally, it handles errors for
+ *   unknown instructions and provides proper error messages with line numbers.
  */
 void execute_command(char *command)
 {
@@ -103,11 +103,18 @@ void execute_command(char *command)
 	/* Handle the case where the opcode is not recognized */
 	if (instructions[i].opcode == NULL)
 	{
-		fprintf(stderr, "L%u: unknown instruction %s\n", monty.line_number, monty.opcode);
+		fprintf(stderr, "L%u: unknown instruction %s\n", monty.line_number,
+		monty.opcode);
 		exit(EXIT_FAILURE);
 	}
 }
 
+/**
+ * push_to_stack - Pushes an integer onto the stack.
+ *
+ * @stack: Double pointer to the top of the stack.
+ * @line_number: Line number where the operation is called.
+ */
 void push_to_stack(stack_t **stack, unsigned int line_number)
 {
 	if (monty.data == NULL || is_integer(monty.data) == 0)
@@ -119,6 +126,13 @@ void push_to_stack(stack_t **stack, unsigned int line_number)
 	push(stack, atoi(monty.data));
 }
 
+/**
+ * is_integer - Checks if a string represent a valid integer.
+ *
+ * @str: Input string to be checked.
+ *
+ * Return: 1 if the string is a valid integer, 0 otherwise.
+ */
 int is_integer(const char *str)
 {
 	if (str == NULL || *str == '\0')
