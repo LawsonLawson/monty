@@ -92,6 +92,7 @@ typedef struct instruction_s
 void push(stack_t **stack, int data);
 void pall(stack_t **stack, unsigned int line_number);
 void pint(stack_t **stack, unsigned int line_number);
+void pop(stack_t **stack, unsigned int line_number);
 
 /* parser and command exec. functions */
 void push_to_stack(stack_t **stack, unsigned int line_number);
