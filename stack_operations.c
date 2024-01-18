@@ -14,6 +14,7 @@
 void push(stack_t **stack, int data)
 {
 	stack_t *new_node = malloc(sizeof(stack_t));
+
 	if (new_node == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
@@ -31,7 +32,7 @@ void push(stack_t **stack, int data)
 	}
 	else
 	{
-		if (monty.data_structure == GO_STACK || monty.data_structure == GO_DEFAULT) 
+		if (monty.data_structure == GO_STACK || monty.data_structure == GO_DEFAULT)
 		{
 			new_node->next = *stack;
 			(*stack)->prev = new_node;
@@ -39,7 +40,7 @@ void push(stack_t **stack, int data)
 				(*stack)->prev = new_node;
 			*stack = new_node;
 		}
-		else 
+		else
 		{
 			monty.tail->next = new_node;
 			new_node->prev = monty.tail;
@@ -50,6 +51,12 @@ void push(stack_t **stack, int data)
 	monty.size++;
 }
 
+/**
+ * pall - Prints all elements in the stack.
+ *
+ * @stack: Double pointer to the top of the stack.
+ * @line_number: Line number where the operation is called (unused).
+ */
 void pall(stack_t **stack, __attribute__((unused)) unsigned int line_number)
 {
 	stack_t *current = NULL;
