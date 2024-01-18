@@ -115,6 +115,7 @@ int is_integer(const char *str);
 /* Memory handling functions */
 void *_calloc(unsigned int nmemb, unsigned int size);
 void _free(void **ptr);
-
+void free_stack(stack_t **stack);
+void exit_gracefully(void);
 
 #endif /* MONTY_H */

@@ -1,9 +1,5 @@
 #include "monty.h"
 
-/* initialize the monty instance globally */
-list monty = {NULL, NULL, 0, NULL, NULL, NULL, NULL, 0, 0, NULL, _free};
-
-
 /**
  * main - Entry point of the Monty interpreter
  * @argc: The number of command-line arguments
@@ -32,6 +28,8 @@ int main(int argc, char *argv[])
 
 	/* Call the `parse_input` function to process the Monty file */
 	parse_input();
+
+	free_stack(&monty.head);
 
 	return (0); /* Return 0 to indicate successful execution */
 }

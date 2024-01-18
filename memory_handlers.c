@@ -62,3 +62,46 @@ void _free(void **ptr)
 		*ptr = NULL;
 	}
 }
+
+/**
+ * free_stack - Frees all nodes in the stack.
+ * @stack: A pointer to the head of the stack.
+ *
+ * Description:
+ *   This function frees all nodes in the stack, one by one,
+ *   by repeatedly calling the `pop` function.
+ *   It continues until the stack is empty or the provided
+ *   stackpointer is NULL. The line number is used for error
+ *   reporting in the `pop` function.
+ */
+void free_stack(stack_t **stack)
+{
+	while (stack != NULL && *stack != NULL)
+	{
+		pop(stack, monty.line_number);
+	}
+}
+
+ /**
+ * exit_gracefully - Performs cleanup tasks before exiting the program.
+ *
+ * Description:
+ *   This function is responsible for performing cleanup tasks
+ *   before exiting the program in case of an error or 
+ *   abnormal termination. It deallocates memory for the buffer,
+ *   frees the entire stack, closes the file pointer,
+ *   and then exits the program with a failure status.
+ */
+void exit_gracefully(void)
+{
+	/* destroy the buffer */
+	monty.destroy((void **)&monty.buffer);
+
+	free_stack(&monty.head);
+
+	/* close the file pointer */
+	if (monty.file_pointer != NULL)
+		fclose(monty.file_pointer);
+
+	exit(EXIT_FAILURE);
+}

@@ -1,5 +1,8 @@
 #include "monty.h"
 
+/* initialize the monty instance globally */
+list monty = {NULL, NULL, 0, NULL, NULL, NULL, NULL, 0, 0, NULL, _free};
+
 /**
  * parse_input - Reads and processes input commands from a Monty file.
  *
@@ -19,7 +22,7 @@ void parse_input(void)
 	if (!monty.file_pointer)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", monty.filename);
-		exit(EXIT_FAILURE);
+		exit_gracefully();
 	}
 	/* Allocate memory for the buffer to store input lines */
 	monty.buffer = _calloc(size, sizeof(char));
@@ -27,7 +30,7 @@ void parse_input(void)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
 		fclose(monty.file_pointer);
-		exit(EXIT_FAILURE);
+		exit_gracefully();
 	}
 	/* Read and process each line from the Monty file */
 	while ((bytes_read = getline(&monty.buffer, &size, monty.file_pointer)) != -1)
@@ -41,12 +44,11 @@ void parse_input(void)
 	/* Handle errors during reading from the file */
 	if (bytes_read == -1)
 	{
-		if (ferror(monty.file_pointer))
-			fprintf(stderr, "Error: readindg from file failed\n");
-		else if (errno == ENOMEM)
+		if (errno == ENOMEM)
+		{
 			fprintf(stderr, "Error: malloc failed\n");
-		fclose(monty.file_pointer);
-		exit(EXIT_FAILURE);
+			exit_gracefully();
+		}
 	}
 	fclose(monty.file_pointer);
 	monty.destroy((void **)&monty.buffer);
@@ -103,7 +105,7 @@ void execute_command(char *command)
 	{
 		fprintf(stderr, "L%u: unknown instruction %s\n", monty.line_number,
 		monty.opcode);
-		exit(EXIT_FAILURE);
+		exit_gracefully();
 	}
 }
 
@@ -118,7 +120,7 @@ void push_to_stack(stack_t **stack, unsigned int line_number)
 	if (monty.data == NULL || is_integer(monty.data) == 0)
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
-		exit(EXIT_FAILURE);
+		exit_gracefully();
 	}
 
 	push(stack, atoi(monty.data));

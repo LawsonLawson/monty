@@ -32,22 +32,22 @@ void push(stack_t **stack, int data)
 	}
 	else
 	{
-		if (monty.data_structure == GO_STACK || monty.data_structure == GO_DEFAULT)
-		{
-			new_node->next = *stack;
-			(*stack)->prev = new_node;
-			if ((*stack)->next == NULL)
-				(*stack)->prev = new_node;
-			*stack = new_node;
-		}
-		else
+		if (monty.data_structure == GO_QUEUE)
 		{
 			monty.tail->next = new_node;
 			new_node->prev = monty.tail;
 			monty.tail = new_node;
 		}
-	}
+		else
+		{
+			new_node->next = *stack;
+			(*stack)->prev = new_node;
+			if ((*stack)->next == NULL)
+				(*stack)->prev = new_node;
 
+			*stack = new_node;
+		}
+	}
 	monty.size++;
 }
 
@@ -90,7 +90,7 @@ void pint(stack_t **stack, unsigned int line_number)
 	if (list_empty(monty))
 	{
 		fprintf(stderr, "L%u: can't pint, stack empry\n", line_number);
-		exit(EXIT_FAILURE);
+		exit_gracefully();
 	}
 
 	printf("%d\n", (*stack)->n);
