@@ -75,7 +75,7 @@ void pstr_op(stack_t **stack, unsigned int line_number)
 /**
  * nop - Does not do anything.
  *
- * @staack: A pointer to the head of the stack.
+ * @stack: A pointer to the head of the stack.
  * @line_number: The line number of instruction in the Monry file.
  *
  * Description: This function doesn't perform any operation unlike the others.

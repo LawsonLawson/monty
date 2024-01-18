@@ -21,7 +21,6 @@ void parse_input(void)
 		fprintf(stderr, "Error: Can't open file %s\n", monty.filename);
 		exit(EXIT_FAILURE);
 	}
-
 	/* Allocate memory for the buffer to store input lines */
 	monty.buffer = _calloc(size, sizeof(char));
 	if (!monty.buffer)
@@ -39,7 +38,6 @@ void parse_input(void)
 			continue;
 		execute_command(monty.buffer);
 	}
-
 	/* Handle errors during reading from the file */
 	if (bytes_read == -1)
 	{
@@ -47,11 +45,9 @@ void parse_input(void)
 			fprintf(stderr, "Error: readindg from file failed\n");
 		else if (errno == ENOMEM)
 			fprintf(stderr, "Error: malloc failed\n");
-
 		fclose(monty.file_pointer);
 		exit(EXIT_FAILURE);
 	}
-
 	fclose(monty.file_pointer);
 	monty.destroy((void **)&monty.buffer);
 }
