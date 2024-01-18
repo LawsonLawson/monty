@@ -149,3 +149,26 @@ void swap(stack_t **stack, unsigned int line_number)
 	(*stack)->n = (*stack)->next->n;
 	(*stack)->next->n = temp;
 }
+
+/**
+ * add - Adds the top two elements of the stack.
+ *
+ * @stack: A pointer to the head of the stack.
+ * @line_number: The line number of the intruction in the Monty file.
+ *
+ * @Description: This function adds the top two elements of the stack. If the
+ * stack contains less than two elements, it prints and error message and exits
+ * with EXIT_FAILUR. The result is stored in the second to top element of the
+ * stack, and the top element is removed.
+ */
+void add(stack_t **stack, unsigned int line_number)
+{
+	if (list_size(monty) < 2)
+	{
+		fprintf(stderr, "L%u: can't add, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+
+	(*stack)->next->n += (*stack)->n;
+	pop(stack, line_number);/* Remove the top element */
+}
