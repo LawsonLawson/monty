@@ -1,8 +1,13 @@
 #ifndef MONTY_H
 #define MONTY_H
+#define _GNU_SOURCE
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <errno.h>
+#include <string.h>
+#include <ctype.h>
+#include <unistd.h>
 
 #define BUFFER_SIZE 1024
 #define GO_DEFAULT 0
@@ -40,7 +45,7 @@ typedef struct stack_s
  * @file_pointer: A pointer to a FILE structure for file operations.
  */
 typedef struct list_t
-{
+{	
 	stack_t *head;
 	stack_t *tail;
 	size_t size;
@@ -78,11 +83,19 @@ typedef struct instruction_s
 #define SET_DATA_STRUCTURE(opcode) \
 	((IS_STACK_OR_QUEUE(opcode)) ? \
 	 ((strcmp((opcode), "stack") == 0) ? GO_STACK : GO_QUEUE) : GO_DEFAULT)
+#define list_empty(list) ((list).size == 0)
+#define list_size(list) ((list).size)
+#define list_head(list) ((list).head)
+#define list_tail(list) ((list).tail)
 
+/* monty stack operation functions */
+void push(stack_t **stack, int data);
 
 /* parser and command exec. functions */
+void push_to_stack(stack_t **stack, unsigned int line_number);
 void parse_input();
 void execute_command(char *command);
+int is_integer(const char *str);
 
 /* Memory handling functions */
 void *_calloc(unsigned int nmemb, unsigned int size);

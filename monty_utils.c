@@ -31,7 +31,7 @@ void parse_input(void)
 	}
 
 	/* Read and process each line from the Monty file */
-	while ((bytes_read = getline(&monty.buffer, size, monty.file_pointer)) != -1)
+	while ((bytes_read = getline(&monty.buffer, &size, monty.file_pointer)) != -1)
 	{
 		++monty.line_number;
 		execute_command(monty.buffer);
@@ -71,7 +71,7 @@ void execute_command(char *command)
 
 	/* an array of instruction_t struct with opcode-function pairs */
 	instruction_t instructions[] = {
-		{"push", push_to_list}, {"pall", pall}
+		{"push", push_to_stack}
 	};
 
 	/* Loop through the instructions array to find a matching opcode */
@@ -103,8 +103,35 @@ void execute_command(char *command)
 	/* Handle the case where the opcode is not recognized */
 	if (instructions[i].opcode == NULL)
 	{
-		fprintf(stderr, "L%u: unknown instruction %s\n",
-				monty.line_number, monty.opcode);
+		fprintf(stderr, "L%u: unknown instruction %s\n", monty.line_number, monty.opcode);
 		exit(EXIT_FAILURE);
 	}
+}
+
+void push_to_stack(stack_t **stack, unsigned int line_number)
+{
+	if (monty.data == NULL || is_integer(monty.data) == 0)
+	{
+		fprintf(stderr, "L%u: usage: push integer\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+
+	push(stack, atoi(monty.data));
+}
+
+int is_integer(const char *str)
+{
+	if (str == NULL || *str == '\0')
+	{
+		return (0);
+	}
+
+	while (*str != '\0')
+	{
+		if (!isdigit(*str) && *str != '+' && *str != '-')
+			return (0);
+		str++;
+	}
+
+	return (1);
 }
