@@ -71,9 +71,9 @@ void execute_command(char *command)
 
 	/* an array of instruction_t struct with opcode-function pairs */
 	instruction_t instructions[] = {
-		{"push", push_to_stack}, {"pall", pall}, {"pint", pint}
+		{"push", push_to_stack}, {"pall", pall}, {"pint", pint}, {"pop", pop},
+		{"swap", swap}
 	};
-
 	/* Loop through the instructions array to find a matching opcode */
 	while (instructions[i].opcode != NULL)
 	{
@@ -85,21 +85,18 @@ void execute_command(char *command)
 			monty.data_structure = SET_DATA_STRUCTURE(monty.opcode);
 			return;
 		}
-
 		/* Check if the opcode matches the current instruction */
 		if (strcmp(instructions[i].opcode, monty.opcode) == 0)
 		{
 			/* If the opcode is "push," get the data argument */
 			if (strcmp(monty.opcode, "push") == 0)
 				monty.data = strtok(NULL, " \t\n");
-
 			/* Call the corresponding function for the opcode */
 			instructions[i].f(&monty.head, monty.line_number);
 			return;
 		}
 		i++;
 	}
-
 	/* Handle the case where the opcode is not recognized */
 	if (instructions[i].opcode == NULL)
 	{
