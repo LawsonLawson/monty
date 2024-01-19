@@ -89,7 +89,7 @@ void pint(stack_t **stack, unsigned int line_number)
 {
 	if (list_empty(monty))
 	{
-		fprintf(stderr, "L%u: can't pint, stack empry\n", line_number);
+		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
 		exit_gracefully();
 	}
 
