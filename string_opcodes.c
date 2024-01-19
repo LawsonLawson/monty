@@ -29,18 +29,17 @@ void pchar_op(stack_t **stack, unsigned int line_number)
 	if (list_empty(monty))
 	{
 		fprintf(stderr, "L%u: can't pchar, stack empty\n", line_number);
-		exit(EXIT_FAILURE);
+		exit_gracefully();
 	}
 
 	ascii_value = (*stack)->n;
 	if (ascii_value < 0 || ascii_value > 127)
 	{
 		fprintf(stderr, "L%u: can't pchar, value out of range\n", line_number);
-		exit(EXIT_FAILURE);
+		exit_gracefully();
 	}
 
-	_putchar(ascii_value);
-	_putchar('\n');
+	printf("%c\n", ascii_value);
 }
 
 /**
