@@ -63,7 +63,7 @@ void pstr_op(stack_t **stack, unsigned int line_number)
 
 	if (list_empty(monty))
 	{
-		putchar(\n);
+		putchar('\n');
 		fflush(stdout);
 		return;
 	}
