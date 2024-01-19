@@ -18,16 +18,16 @@ void push(stack_t **stack, int data)
 	if (new_node == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
-		exit(EXIT_FAILURE);
+		exit_gracefully();
 	}
 
 	new_node->n = data;
 	new_node->prev = NULL;
-	new_node->next = NULL;
 
 	if (list_empty(monty))
 	{
 		*stack = new_node;
+		(*stack)->next = NULL;
 		monty.tail = *stack;
 	}
 	else

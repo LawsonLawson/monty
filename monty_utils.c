@@ -72,7 +72,7 @@ void execute_command(char *command)
 		{"push", push_to_stack}, {"pall", pall}, {"pint", pint}, {"pop", pop},
 		{"swap", swap}, {"add", add}, {"sub", sub}, {"div", div_op}, {"mul", mul_op},
 		{"mod", mod_op}, {"pchar", pchar_op}, {"pstr", pstr_op}, {"rotl", rotl},
-		{"rotr", rotr}
+		{"rotr", rotr}, {NULL, NULL}
 	};
 	/* Loop through the instructions array to find a matching opcode */
 	while (instructions[i].opcode != NULL)
