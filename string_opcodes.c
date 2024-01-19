@@ -61,13 +61,20 @@ void pstr_op(stack_t **stack, unsigned int line_number)
 {
 	stack_t *current = *stack;
 
+	if (list_empty(monty))
+	{
+		putchar(\n);
+		fflush(stdout);
+		return;
+	}
+
 	while (current != NULL && current->n != 0 &&
 	(current->n >= 0 && current->n <= 127))
 	{
-		_putchar(current->n);
+		putchar(current->n);
 		current = current->next;
 	}
-	_putchar('\n');
+	putchar('\n');
 	(void)line_number;/* perhaps __unused__ att would surfice */
 }
 
