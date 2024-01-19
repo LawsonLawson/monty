@@ -133,18 +133,28 @@ void push_to_stack(stack_t **stack, unsigned int line_number)
  */
 int is_integer(const char *str)
 {
+	int numbers = 0;
+
 	if (str == NULL || *str == '\0')
-	{
 		return (0);
-	}
+
+	if (*str == '-' || *str == '+')
+		str++; /* moved past the sign */
 
 	while (*str != '\0')
 	{
-		if (!isdigit(*str) && *str != '+' && *str != '-')
-			return (0);
-		str++;
+		if (is_digit(*str))
+		{
+			str++; /* we found a number, keep searching */
+			numbers++;
+		}
+		else
+			return (0); /* non-integer found */
 	}
 
-	return (1);
+	if (numbers == 0)
+		return (0);
+
+	return (1); /* if we got this far, it's definitely an integer */
 }
 

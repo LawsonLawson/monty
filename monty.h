@@ -77,6 +77,7 @@ typedef struct instruction_s
 
 
 /* function macros */
+#define is_digit(c) ((c) >= '0' && (c) <= '9')
 #define IS_STACK_OR_QUEUE(opcode) \
 	(strcmp((opcode), "stack") == 0 || strcmp((opcode), "queue") == 0)
 #define SET_DATA_STRUCTURE(opcode) \
